@@ -41,10 +41,10 @@ function displayDayAndTime() {
 
 
 function loadWeatherData(city) {
-    let api = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?q=";
+    let api = "https://api.openweathermap.org/data/2.5/weather?q=";
     city = encodeURIComponent(city.trim());
-    let units = "&units=imperial"
-    let key = "&appid=c2e34159fe50dfa33d4dfc1b89a3d3fc"
+    let units = "&units=imperial";
+    let key = "&appid=c2e34159fe50dfa33d4dfc1b89a3d3fc";
     $.ajax({
         url: api + city + units + key,
         type: "GET",
