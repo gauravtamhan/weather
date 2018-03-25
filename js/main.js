@@ -18,8 +18,8 @@ $(document).ready(function() {
         $(this).closest('.shape').remove()
     })
 
-
-    $('#add-city').click(function(e) {
+    $('#city-form').on('submit', function(e) {
+        e.preventDefault();
         let input = $('#user-input').val();
         loadWeatherData(input);
     })
@@ -115,7 +115,7 @@ function generateCard(obj) {
                             </div>
                             <div class="data-right">
                                 <p class="label">sunset</p>
-                                <p class="label-data">${sunrise}</p>
+                                <p class="label-data">${sunset}</p>
                             </div>
                         </div>
                         <div class="data-row d2">
@@ -207,4 +207,5 @@ function getGradient(id) {
     ]
     let index = Math.floor(id / 100);
     return arr[index];
+    // return "white";
 }
