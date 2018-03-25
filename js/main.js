@@ -10,12 +10,16 @@ $(document).ready(function() {
     loadWeatherData("london");
 
 
+
     $('#card-container').on('click', '.shape', function(e) {
         $(this).shape('flip over');
     })
 
     $('#card-container').on('click', '.btn-remove', function(e) {
-        $(this).closest('.shape').remove()
+        let card = $(this);
+        card.closest('.shape').fadeOut('fast', 'linear', function() {
+            $(this).remove();
+        });
     })
 
     $('#city-form').on('submit', function(e) {
@@ -54,18 +58,31 @@ function loadWeatherData(city) {
             removeLoader();
             generateCard(data);
         },
-        error: function() {
+        error: function(jqXHR, exception) {
             removeLoader();
-            console.log("Something went wrong!");
+
+            let msg = '';
+            if (jqXHR.status == 404) {
+                msg = "Please enter a valid city name";
+            }
+            displayError(msg);
         }
     });
+}
+
+function displayError(str) {
+    $('#error-box>p').text(str);
+    $('#error-box').slideDown();
+    setTimeout(function() {
+        $('#error-box').slideUp();
+    }, 2000);
 }
 
 function showLoader() {
     const template = `
         <div class="card loading">
             <div class="loading-img-box">
-                <img src="imgs/spinner2.gif" />
+                <img src="imgs/spinner4.gif" />
             </div>
         </div>
     `;
@@ -134,7 +151,7 @@ function generateCard(obj) {
             <div class="side">
                 <div class="card card-back">
                     <div class="card-body">
-                        <h5 class="card-message">Do you want to remove this card?</h5>
+                        <h5 class="card-message">Want to remove this card?</h5>
                         <button type="button" class="btn btn-option btn-remove">Remove</button>
                     </div>
                 </div>
@@ -206,6 +223,6 @@ function getGradient(id) {
         "white"
     ]
     let index = Math.floor(id / 100);
-    return arr[index];
-    // return "white";
+    // return arr[index];
+    return "#f6fafd";
 }
