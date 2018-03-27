@@ -17,7 +17,7 @@ $(document).ready(function() {
 
     $('#card-container').on('click', '.btn-remove', function(e) {
         let card = $(this);
-        card.closest('.shape').fadeOut('fast', 'linear', function() {
+        card.closest('.outside').fadeOut('fast', 'linear', function() {
             $(this).remove();
         });
     })
@@ -56,6 +56,7 @@ function loadWeatherData(city) {
         beforeSend: showLoader,
         success: function(data) {
             removeLoader();
+            console.log(data);
             generateCard(data);
         },
         error: function(jqXHR, exception) {
@@ -75,15 +76,17 @@ function displayError(str) {
     $('#error-box').slideDown();
     setTimeout(function() {
         $('#error-box').slideUp();
-    }, 2000);
+    }, 3000);
 }
 
 function showLoader() {
     const template = `
+        <div class="outside l">
         <div class="card loading">
             <div class="loading-img-box">
                 <img src="imgs/spinner4.gif" />
             </div>
+        </div>
         </div>
     `;
 
@@ -91,7 +94,7 @@ function showLoader() {
 }
 
 function removeLoader() {
-    $('.loading').last().remove();
+    $('.l').last().remove();
 }
 
 function generateCard(obj) {
@@ -109,6 +112,7 @@ function generateCard(obj) {
     let gradient =      getGradient(obj.weather[0].id);
 
     const template = `
+    <div class="outside">
     <div class="ui shape">
         <div class="sides">
             <div class="active side">
@@ -157,6 +161,7 @@ function generateCard(obj) {
                 </div>
             </div>
         </div>
+    </div>
     </div>
     `;
 

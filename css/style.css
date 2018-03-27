@@ -62,6 +62,10 @@ h1 {
     border-color: white; */
 }
 
+.loading {
+    vertical-align: top;
+}
+
 .card-back {
     background: rgb(68,75,90);
 }
@@ -109,9 +113,6 @@ h1 {
 }
 
 .loading-img-box > img {
-    /* width: 80%;
-    opacity: .8;
-    margin-top: 3rem; */
     width: 44%;
     margin-top: 6rem;
 }
@@ -132,6 +133,10 @@ h1 {
 
 #error-box > p {
     margin-bottom: 0;
+}
+
+.outside {
+    display: inline-block;
 }
 
 /*
@@ -172,10 +177,6 @@ h1 {
     width: 55%;
 }
 
-.mar-neg .data-right {
-    /* width: 36%; */
-}
-
 .label {
     text-transform: uppercase;
     font-size: .9rem;
@@ -187,28 +188,10 @@ h1 {
     font-size: 1.3rem;
 }
 
-.mar-neg {
-    /* margin-top: -0.6rem */
-}
-
-.mar-mor {
-    /* margin-top: 3rem; */
-}
-
 .t1 {
-    /* height: 200px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.t1 .data-left {
-    /* padding-top: 20px;
-    width: 64%; */
-}
-
-.t1 .data-left, .t1 .data-right {
-    /* height: 100%; */
 }
 
 .d1 {
@@ -297,10 +280,10 @@ h1 {
         margin: 1.3rem auto;
         display: block;
     }
-    .shape {
-        position: absolute;
-        left: 50%;
-        transform: translatex(-50%);
+
+    .outside {
+        display: flex;
+        justify-content: center;
     }
 }
 
