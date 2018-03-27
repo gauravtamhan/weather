@@ -21,6 +21,7 @@ $(document).ready(function() {
 
     $('#city-form').on('submit', function(e) {
         e.preventDefault();
+        $('#user-input').blur();
         let input = $('#user-input').val();
         loadWeatherData(input);
     })
