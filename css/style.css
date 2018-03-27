@@ -1,8 +1,8 @@
 
 body {
     color: #555;
-    /* color: rgb(50, 50, 50); */
-    background-color: rgb(154, 184, 194);
+    color: rgb(68,75,90);
+    /* background-color: rgb(154, 184, 194); */
 }
 
 div.margin-top {
@@ -25,7 +25,6 @@ h1 {
 
 #card-container {
     min-height: 50vh;
-    padding-bottom: 4rem;
 }
 
 .card {
@@ -85,7 +84,7 @@ h1 {
 }
 
 .heading {
-    color: white;
+    /* color: white; */
     margin-bottom: 1.8rem;
 }
 
@@ -113,8 +112,8 @@ h1 {
 }
 
 .loading-img-box > img {
-    width: 44%;
-    margin-top: 6rem;
+    width: 66%;
+    margin-top: 5rem;
 }
 
 #city-form {
@@ -212,6 +211,10 @@ h1 {
     box-shadow: initial;
 }
 
+.btn-outline-secondary:not(:disabled):not(.disabled).active, .btn-outline-secondary:not(:disabled):not(.disabled):active, .show>.btn-outline-secondary.dropdown-toggle, .btn-outline-secondary:hover {
+    background-color: rgb(68,75,90);
+}
+
 .mb-3 {
     margin-bottom: 0 !important;
     margin-top: 1.6rem!important;
@@ -222,13 +225,124 @@ h1 {
 }
 
 .form-control:focus {
-    border-color: #6c757d;
+    /* border-color: #6c757d; */
     box-shadow: initial;
+    background-color: rgb(240, 240, 240);
 }
 
 .btn-outline-secondary {
     background-color: white;
 }
+
+form input.form-control, form input.btn-outline-secondary {
+    background-color: rgb(240, 240, 240);
+    border: 0;
+    border-radius: 10px;
+}
+
+div#hint {
+    text-align: center;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 46vh;
+}
+
+div#hint p {
+    opacity: 0.5;
+    font-weight: 300;
+    margin-bottom: .5rem;
+}
+
+div#hint p:first-child {
+    font-weight: 600;
+    font-size: 1.2rem;
+    opacity: .7;
+}
+
+
+.shake {
+	-webkit-animation: kf_shake 0.4s 1 linear;
+	-moz-animation: kf_shake 0.4s 1 linear;
+	-o-animation: kf_shake 0.4s 1 linear;
+}
+@-webkit-keyframes kf_shake {
+	0% { -webkit-transform: translate(30px); }
+	20% { -webkit-transform: translate(-30px); }
+	40% { -webkit-transform: translate(15px); }
+	60% { -webkit-transform: translate(-15px); }
+	80% { -webkit-transform: translate(8px); }
+	100% { -webkit-transform: translate(0px); }
+}
+@-moz-keyframes kf_shake {
+	0% { -moz-transform: translate(30px); }
+	20% { -moz-transform: translate(-30px); }
+	40% { -moz-transform: translate(15px); }
+	60% { -moz-transform: translate(-15px); }
+	80% { -moz-transform: translate(8px); }
+	100% { -moz-transform: translate(0px); }
+}
+@-o-keyframes kf_shake {
+	0% { -o-transform: translate(30px); }
+	20% { -o-transform: translate(-30px); }
+	40% { -o-transform: translate(15px); }
+	60% { -o-transform: translate(-15px); }
+	80% { -o-transform: translate(8px); }
+	100% { -o-origin-transform: translate(0px); }
+}
+
+
+/*
+ * Footer styles
+ */
+ .footer {
+    margin-top: 4rem;
+}
+
+.footer .container {
+    border-top: 1px solid #e8e8e8;
+}
+
+.footer p {
+    margin: 1rem 0;
+    color: #8e8e8e;
+    font-size: 1rem;
+    line-height: 1.4em;
+    -webkit-font-smoothing: antialiased;
+}
+
+.footer .icons, .footer .footer-text {
+    padding: 1rem 0;
+}
+
+.icons {
+    text-align: right;
+}
+
+.footer .right-text {
+    text-align: right;
+}
+
+.icons a {
+    display: inline-block;
+    margin-left: 1rem;
+    padding: 0 4px;
+}
+
+.icons a img {
+    width: 25px;
+}
+
+.ion-heart {
+    color: #d43c67;
+
+    margin-left: 2px;
+    margin-right: 2px;
+}
+/* * * * * * */
 
 
 @media (max-width: 1199px) {
@@ -291,5 +405,38 @@ h1 {
     #city-form {
         max-width: 314px;
         width: 100%;
+    }
+
+    .footer .fb-2 {
+        order: 2;
+    }
+
+    .footer .icons {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .footer .icons a {
+        margin: 0 .3rem;
+    }
+
+    .footer .footer-text {
+        text-align: center;
+    }
+
+    .footer .icons {
+        padding: 1rem 0 .2rem;
+    }
+
+    .footer .footer-text {
+        padding: .2rem 0 1rem;
+    }
+
+    .footer .right-text {
+        padding: 1rem 0 0 0;
+    }
+
+    .footer .right-text p {
+        margin-bottom: 0;
     }
 }

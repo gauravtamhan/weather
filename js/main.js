@@ -5,12 +5,7 @@
 $(document).ready(function() {
 
     displayDayAndTime();
-    loadWeatherData("amsterdam");
-    loadWeatherData("new york");
-    loadWeatherData("london");
-
-
-
+    showHint();
     $('#card-container').on('click', '.shape', function(e) {
         $(this).shape('flip over');
     })
@@ -19,7 +14,9 @@ $(document).ready(function() {
         let card = $(this);
         card.closest('.outside').fadeOut('fast', 'linear', function() {
             $(this).remove();
+            showHint();
         });
+
     })
 
     $('#city-form').on('submit', function(e) {
@@ -55,8 +52,8 @@ function loadWeatherData(city) {
         dataType: "jsonp",
         beforeSend: showLoader,
         success: function(data) {
+            removeHint();
             removeLoader();
-            console.log(data);
             generateCard(data);
         },
         error: function(jqXHR, exception) {
@@ -67,6 +64,7 @@ function loadWeatherData(city) {
                 msg = "Please enter a valid city name";
             }
             displayError(msg);
+            shakeForm();
         }
     });
 }
@@ -84,7 +82,7 @@ function showLoader() {
         <div class="outside l">
         <div class="card loading">
             <div class="loading-img-box">
-                <img src="imgs/spinner4.gif" />
+                <img src="imgs/spinner2.gif" />
             </div>
         </div>
         </div>
@@ -228,6 +226,34 @@ function getGradient(id) {
         "white"
     ]
     let index = Math.floor(id / 100);
-    // return arr[index];
-    return "#f6fafd";
+    return arr[index];
+    // return "#f6fafd";
+}
+
+function showHint() {
+    let isEmpty = $.trim($('#card-container').html()) === '';
+    if (isEmpty) {
+        let hint = `
+        <div id="hint">
+            <p>Hey there!</p>
+            <p>You can add weather cards to your dashboard by entering the name of a city above.</p>
+            <p>To remove a weather card, simply click on the card and select 'Remove'</p>
+        </div>
+        `;
+        $('#card-container').append(hint);
+    }
+}
+
+function removeHint() {
+    let hint = $('#hint');
+    if (hint.length) {
+        hint.remove();
+    }
+}
+
+function shakeForm() {
+    $('#city-form').addClass('shake');
+    $('#city-form').on('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){
+      $('#city-form').delay(200).removeClass('shake');
+    });
 }
