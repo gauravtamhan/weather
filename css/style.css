@@ -240,6 +240,11 @@ form input.form-control, form input.btn-outline-secondary {
     border-radius: 10px;
 }
 
+form input.form-control::placeholder {
+    opacity: .9;
+    color: rgb(169, 169, 173);
+}
+
 div#hint {
     text-align: center;
     padding-left: 2.5rem;

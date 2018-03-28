@@ -2,6 +2,8 @@
 * Main file for running JS code
 */
 
+let cityArray = [];
+
 $(document).ready(function() {
 
     displayDayAndTime();
@@ -23,7 +25,7 @@ $(document).ready(function() {
         e.preventDefault();
         $('#user-input').blur();
         let input = $('#user-input').val();
-        loadWeatherData(input);
+        validateInputAndMakeRequest(input);
     })
 });
 
@@ -64,15 +66,21 @@ function loadWeatherData(city) {
             if (jqXHR.status == 404) {
                 msg = "Please enter a valid city name";
             }
-            displayError(msg);
+            displayError(msg, 'red');
             shakeForm();
         }
     });
 }
 
-function displayError(str) {
+function displayError(str, color) {
+    let colors = {
+        'blue': 'rgb(43, 130, 221)',
+        'red': 'rgb(235, 95, 107)',
+        'orange': 'rgb(251, 148, 41)'
+    };
+
     $('#error-box>p').text(str);
-    $('#error-box').slideDown();
+    $('#error-box').css("background-color", colors[color]).slideDown();
     setTimeout(function() {
         $('#error-box').slideUp();
     }, 3000);
@@ -89,11 +97,11 @@ function showLoader() {
         </div>
     `;
 
-    $('#card-container').append(template);
+    $('#card-container').prepend(template);
 }
 
 function removeLoader() {
-    $('.l').last().remove();
+    $('.l').first().remove(); // here
 }
 
 function generateCard(obj) {
@@ -164,7 +172,7 @@ function generateCard(obj) {
     </div>
     `;
 
-    $('#card-container').append(template);
+    $('#card-container').prepend(template);
 }
 
 function getLocalTime(sec) {
@@ -257,4 +265,19 @@ function shakeForm() {
     $('#city-form').on('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){
       $('#city-form').delay(200).removeClass('shake');
     });
+}
+
+function validateInputAndMakeRequest(str) {
+    str = str.toLowerCase();
+    if (str === "") {
+        displayError("City name cannot be blank", 'orange');
+        shakeForm();
+    } else if ($.inArray(str, cityArray) < 0) {  // input doesn't exist
+        cityArray.push(str);
+        loadWeatherData(str);
+    } else {                               // input already exists
+        let msg = "City has already been added";
+        displayError(msg, 'blue');
+        shakeForm();
+    }
 }
