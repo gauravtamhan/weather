@@ -15,6 +15,7 @@ $(document).ready(function() {
     $('#card-container').on('click', '.btn-remove', function(e) {
         let card = $(this);
         card.closest('.outside').fadeOut('fast', 'linear', function() {
+            removeCity($(this).find(".city").first().text());
             $(this).remove();
             showHint();
         });
@@ -44,9 +45,9 @@ function displayDayAndTime() {
 }
 
 
-function loadWeatherData(city) {
+function loadWeatherData(value) {
     let api = "https://api.openweathermap.org/data/2.5/weather?q=";
-    city = encodeURIComponent(city.trim());
+    city = encodeURIComponent(value.trim());
     let units = "&units=imperial";
     let key = "&appid=c2e34159fe50dfa33d4dfc1b89a3d3fc";
     $.ajax({
@@ -56,6 +57,7 @@ function loadWeatherData(city) {
         beforeSend: showLoader,
         success: function(data) {
             removeHint();
+            cityArray.push(value);
             removeLoader();
             generateCard(data);
         },
@@ -273,11 +275,16 @@ function validateInputAndMakeRequest(str) {
         displayError("City name cannot be blank", 'orange');
         shakeForm();
     } else if ($.inArray(str, cityArray) < 0) {  // input doesn't exist
-        cityArray.push(str);
         loadWeatherData(str);
     } else {                               // input already exists
         let msg = "City has already been added";
         displayError(msg, 'blue');
         shakeForm();
     }
+}
+
+function removeCity(str) {
+    let i = cityArray.indexOf(str.toLowerCase());
+    cityArray.splice(i, 1);
+    console.log(cityArray);
 }
